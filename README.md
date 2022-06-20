@@ -2,10 +2,10 @@
 
 Steps to run the aplication:
 
-Download the zip file - https://storage.googleapis.com/scratchpay-com-assets/challenges/qa-challenge-application.zip
-Unzip the file
-Run locally > npm install
-Run locally > npm start
+1. Download the zip file - https://storage.googleapis.com/scratchpay-com-assets/challenges/qa-challenge-application.zip
+2. Unzip the file
+3. Run locally > npm install
+4.Run locally > npm start
 
 The entire API is accessible under `/api/v1` and the following endpoints are available:
 
