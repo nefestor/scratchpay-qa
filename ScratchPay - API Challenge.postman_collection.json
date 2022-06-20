@@ -1,0 +1,1099 @@
+{
+	"info": {
+		"_postman_id": "ed82ee78-67d7-40e1-b2e3-657fa46c2914",
+		"name": "ScratchPay - API Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "21542800"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Bearer Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.globals.set(\"token\", pm.response.json().data.session.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/auth?email=gianna@hightable.test&password=thedantonio1",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"auth"
+							],
+							"query": [
+								{
+									"key": "email",
+									"value": "gianna@hightable.test"
+								},
+								{
+									"key": "password",
+									"value": "thedantonio1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Scenario 1 - GET Clinics Emails",
+			"item": [
+				{
+					"name": "Validate Schema",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"ok\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"data\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"users\": {\r",
+									"          \"type\": \"array\",\r",
+									"          \"items\": [\r",
+									"            {\r",
+									"              \"type\": \"object\",\r",
+									"              \"properties\": {\r",
+									"                \"id\": {\r",
+									"                  \"type\": \"integer\"\r",
+									"                },\r",
+									"                \"email\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                },\r",
+									"                \"firstName\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                },\r",
+									"                \"lastName\": {\r",
+									"                  \"type\": \"string\"\r",
+									"                }\r",
+									"              },\r",
+									"              \"required\": [\r",
+									"                \"id\",\r",
+									"                \"email\",\r",
+									"                \"firstName\",\r",
+									"                \"lastName\"\r",
+									"              ]\r",
+									"            },\r",
+									"          ]\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"users\"\r",
+									"      ]\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"ok\",\r",
+									"    \"data\"\r",
+									"  ]\r",
+									"}\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test('Schema is valid', () => {\r",
+									"    pm.expect(response).to.have.jsonSchema(schema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics/1/emails",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics",
+								"1",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Response",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//This is a flaky test, should be fixed. I did just to follow the same approach for all endpoints.\r",
+									"\r",
+									"const expected_response = {\r",
+									"    \"ok\": true,\r",
+									"    \"data\": {\r",
+									"        \"users\": [\r",
+									"            {\r",
+									"                \"id\": 3,\r",
+									"                \"email\": \"gianna@hightable.test\",\r",
+									"                \"firstName\": \"Gianna\",\r",
+									"                \"lastName\": \"D'Antonio\"\r",
+									"            },\r",
+									"            {\r",
+									"                \"id\": 4,\r",
+									"                \"email\": \"johnny@breakingpoints.com\",\r",
+									"                \"firstName\": \"Johnny\",\r",
+									"                \"lastName\": \"Utah\"\r",
+									"            }\r",
+									"        ]\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Test 1: Validanting response\", () => {\r",
+									"        pm.expect(expected_response).to.eql(pm.response.json());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics/1/emails",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics",
+								"1",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Headers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Content-Type\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics/1/emails",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics",
+								"1",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return success when the user has permission to access clinic emails.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics/1/emails",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics",
+								"1",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when search for email instead of email.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 404 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(404);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"unknown action or invalid apiVersion\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics/1/email",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics",
+								"1",
+								"email"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when search for clinic instead of clinics",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(404);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"unknown action or invalid apiVersion\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinic/1/emails",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinic",
+								"1",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when request method not allowed",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(405);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Method Not Allowed. Allow: GET\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics/1/emails",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics",
+								"1",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the user doesn't have permission.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 403 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(403);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Error: User does not have permission\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics/2/emails",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics",
+								"2",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the clinic is not found.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 404 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(404);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"999999 clinic not found\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics/999999/emails",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics",
+								"999999",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the clinic is invalid",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid clinic is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics/QA/emails",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics",
+								"QA",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the clinic is blank.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Clinics is a required parameter for this action\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics//emails",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics",
+								"",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the clinic is a single space.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Clinics is a required parameter for this action\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics/ /emails",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics",
+								" ",
+								"emails"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Scenario 2 - GET Clinics by Term",
+			"item": [
+				{
+					"name": "Validate Schema",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"ok\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"data\": {\r",
+									"      \"type\": \"array\",\r",
+									"      \"items\": [\r",
+									"        {\r",
+									"          \"type\": \"object\",\r",
+									"          \"properties\": {\r",
+									"            \"id\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"displayName\": {\r",
+									"              \"type\": \"string\"\r",
+									"            }\r",
+									"          },\r",
+									"          \"required\": [\r",
+									"            \"id\",\r",
+									"            \"displayName\"\r",
+									"          ]\r",
+									"        },\r",
+									"        {\r",
+									"          \"type\": \"object\",\r",
+									"          \"properties\": {\r",
+									"            \"id\": {\r",
+									"              \"type\": \"integer\"\r",
+									"            },\r",
+									"            \"displayName\": {\r",
+									"              \"type\": \"string\"\r",
+									"            }\r",
+									"          },\r",
+									"          \"required\": [\r",
+									"            \"id\",\r",
+									"            \"displayName\"\r",
+									"          ]\r",
+									"        }\r",
+									"      ]\r",
+									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"ok\",\r",
+									"    \"data\"\r",
+									"  ]\r",
+									"}\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test('Schema is valid', () => {\r",
+									"    pm.expect(response).to.have.jsonSchema(schema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics?term=veterinary",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "veterinary"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Response",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const expected_response = {\r",
+									"    \"ok\": true,\r",
+									"    \"data\": [\r",
+									"        {\r",
+									"            \"id\": 2,\r",
+									"            \"displayName\": \"Continental Veterinary Clinic, Los Angeles, CA\"\r",
+									"        }\r",
+									"    ]\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Test 1: Validanting response\", () => {\r",
+									"        pm.expect(expected_response).to.eql(pm.response.json());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics?term=Continental%20Veterinary%20Clinic",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "Continental%20Veterinary%20Clinic"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Headers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Content-Type\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics?term=veterinary",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "veterinary"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return success when term is valid.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics?term=veterinary",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "veterinary"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the term is not found.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 404 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(404);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"QA123 term not found\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics?term=QA123",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "QA123"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when request method not allowed.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 405 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(405);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Method Not Allowed. Allow: GET\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics?term=vet",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "vet"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the term is invalid.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid term is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics?term=-1",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the term is blank.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 422 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(422);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"term is a required parameter for this action\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics?term=",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the term is a single space",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid term is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://qa-challenge-api.scratchpay.com/api/clinics?term= ",
+							"protocol": "https",
+							"host": [
+								"qa-challenge-api",
+								"scratchpay",
+								"com"
+							],
+							"path": [
+								"api",
+								"clinics"
+							],
+							"query": [
+								{
+									"key": "term",
+									"value": " "
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "a75c638e-e629-4a1b-9a5a-db8f4ba541fd",
+		"_postman_id": "446da1a0-03ec-4a2c-817b-a597edcef8a2",
 		"name": "ScratchPay",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "17845092"
+		"_exporter_id": "21542800"
 	},
 	"item": [
 		{
@@ -17,15 +17,19 @@
 							"script": {
 								"exec": [
 									"const schema = {\r",
-									"    \"type\": \"object\",\r",
-									"    \"properties\": {\r",
-									"        \"ok\": {\r",
-									"            \"type\": \"boolean\"\r",
-									"        },\r",
-									"        \"results\": {\r",
-									"            \"type\": \"boolean\"\r",
-									"        }\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"ok\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"results\": {\r",
+									"      \"type\": \"boolean\"\r",
 									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"ok\",\r",
+									"    \"results\"\r",
+									"  ]\r",
 									"}\r",
 									"\r",
 									"const response = pm.response.json();\r",
@@ -142,6 +146,58 @@
 					],
 					"request": {
 						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-01-05&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-01-05"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when request method not allowed. Copy",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(405);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Method Not Allowed. Allow: GET\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
 						"header": [],
 						"url": {
 							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-01-05&country=BR",
@@ -544,11 +600,11 @@
 							"script": {
 								"exec": [
 									"pm.test('Test 1: 400 Status Code', () => {\r",
-									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"    pm.expect(pm.response.code).to.equal(422);\r",
 									"});\r",
 									"\r",
 									"pm.test('Test 2: Error message', () => {\r",
-									"     pm.expect(pm.response.text()).to.include(\"A valid date is required\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"date is a required parameter for this action\");\r",
 									"});\r",
 									""
 								],
@@ -578,6 +634,58 @@
 								{
 									"key": "date",
 									"value": ""
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the date is a single space.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(422);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"date is a required parameter for this action\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date= &country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": " "
 								},
 								{
 									"key": "country",
@@ -745,7 +853,7 @@
 					"response": []
 				},
 				{
-					"name": "Should return an error when the country is invalid.",
+					"name": "Should return an error when the country is not found.",
 					"event": [
 						{
 							"listen": "test",
@@ -790,6 +898,58 @@
 								{
 									"key": "country",
 									"value": "QA"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the country is a single space.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"country is a required parameter for this action\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-02-30&country= ",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-02-30"
+								},
+								{
+									"key": "country",
+									"value": " "
 								}
 							]
 						}
@@ -861,40 +1021,55 @@
 							"script": {
 								"exec": [
 									"const schema = {\r",
-									"    \"type\": \"object\",\r",
-									"    \"properties\": {\r",
-									"        \"ok\": {\r",
-									"            \"type\": \"boolean\"\r",
+									"  \"type\": \"object\",\r",
+									"  \"properties\": {\r",
+									"    \"ok\": {\r",
+									"      \"type\": \"boolean\"\r",
+									"    },\r",
+									"    \"initialQuery\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"initialDate\": {\r",
+									"          \"type\": \"string\"\r",
 									"        },\r",
-									"        \"initialQuery\": {\r",
-									"            \"type\": \"object\",\r",
-									"            \"properties\": {\r",
-									"                \"initialDate\": {\r",
-									"                    \"type\": \"string\"\r",
-									"                },\r",
-									"                \"delay\": {\r",
-									"                    \"type\": \"string\"\r",
-									"                }\r",
-									"            }\r",
-									"        },\r",
-									"        \"results\": {\r",
-									"            \"type\": \"object\",\r",
-									"            \"properties\": {\r",
-									"                \"businessDate\": {\r",
-									"                    \"type\": \"string\"\r",
-									"                },\r",
-									"                \"holidayDays\": {\r",
-									"                    \"type\": \"integer\"\r",
-									"                },\r",
-									"                \"totalDays\": {\r",
-									"                    \"type\": \"integer\"\r",
-									"                },\r",
-									"                \"weekendDays\": {\r",
-									"                    \"type\": \"integer\"\r",
-									"                }\r",
-									"            }\r",
+									"        \"delay\": {\r",
+									"          \"type\": \"string\"\r",
 									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"initialDate\",\r",
+									"        \"delay\"\r",
+									"      ]\r",
+									"    },\r",
+									"    \"results\": {\r",
+									"      \"type\": \"object\",\r",
+									"      \"properties\": {\r",
+									"        \"businessDate\": {\r",
+									"          \"type\": \"string\"\r",
+									"        },\r",
+									"        \"holidayDays\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"totalDays\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        },\r",
+									"        \"weekendDays\": {\r",
+									"          \"type\": \"integer\"\r",
+									"        }\r",
+									"      },\r",
+									"      \"required\": [\r",
+									"        \"businessDate\",\r",
+									"        \"holidayDays\",\r",
+									"        \"totalDays\",\r",
+									"        \"weekendDays\"\r",
+									"      ]\r",
 									"    }\r",
+									"  },\r",
+									"  \"required\": [\r",
+									"    \"ok\",\r",
+									"    \"initialQuery\",\r",
+									"    \"results\"\r",
+									"  ]\r",
 									"}\r",
 									"\r",
 									"const response = pm.response.json();\r",
@@ -1020,6 +1195,58 @@
 					],
 					"request": {
 						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "delay",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when request method not allowed.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 405 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(405);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Method Not Allowed. Allow: GET\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
 						"header": [],
 						"url": {
 							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay=1",
@@ -1336,12 +1563,12 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"pm.test('Test 1: 400 Status Code', () => {\r",
 									"    pm.expect(pm.response.code).to.equal(400);\r",
 									"});\r",
 									"\r",
 									"pm.test('Test 2: Error message', () => {\r",
-									"     pm.expect(pm.response.text()).to.include(\"A initial date is required\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"Initial Date is a required parameter for this action\");\r",
 									"});\r",
 									""
 								],
@@ -1383,6 +1610,70 @@
 								{
 									"key": "initialDate",
 									"value": ""
+								},
+								{
+									"key": "delay",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the initialDate is a single space.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Initial Date is a required parameter for this action\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate= &delay=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": " "
 								},
 								{
 									"key": "delay",
@@ -1528,7 +1819,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"pm.test('Test 1: 400 Status Code', () => {\r",
 									"    pm.expect(pm.response.code).to.equal(400);\r",
 									"});\r",
 									"\r",
@@ -1592,7 +1883,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"pm.test('Test 1: 400 Status Code', () => {\r",
 									"    pm.expect(pm.response.code).to.equal(400);\r",
 									"});\r",
 									"\r",
@@ -1720,12 +2011,12 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"pm.test('Test 1: 200 Status Code', () => {\r",
-									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"pm.test('Test 1: 422 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(422);\r",
 									"});\r",
 									"\r",
 									"pm.test('Test 2: Error message', () => {\r",
-									"     pm.expect(pm.response.text()).to.include(\"A valid delay is required\");\r",
+									"     pm.expect(pm.response.text()).to.include(\"Delay is a required parameter for this action\");\r",
 									"});\r",
 									""
 								],
@@ -1771,6 +2062,70 @@
 								{
 									"key": "delay",
 									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the delay is a single space.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"delay is a required parameter for this action\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay= ",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "delay",
+									"value": " "
 								}
 							]
 						}
