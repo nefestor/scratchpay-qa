@@ -1,0 +1,1783 @@
+{
+	"info": {
+		"_postman_id": "a75c638e-e629-4a1b-9a5a-db8f4ba541fd",
+		"name": "ScratchPay",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17845092"
+	},
+	"item": [
+		{
+			"name": "GET - isBusinessDay",
+			"item": [
+				{
+					"name": "Validate Schema",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"        \"ok\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"        },\r",
+									"        \"results\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"        }\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"pm.test('Schema is valid', () => {\r",
+									"    pm.expect(response).to.have.jsonSchema(schema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-01-05&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-01-05"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Response",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const expected_response = {\r",
+									"    \"ok\": true,\r",
+									"    \"results\": true\r",
+									"}\r",
+									"\r",
+									"pm.test(\"Test 1: Validanting schema\", () => {\r",
+									"        pm.expect(expected_response).to.eql(pm.response.json());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-01-05&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-01-05"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate headers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Content-Type\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-01-05&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-01-05"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return success when date and country are valid.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: Should return OK', () => {\r",
+									"    pm.response.to.have.status('OK');\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test 3 :Response time is less than 200ms\", () => {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-01-05&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-01-05"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return success without a country on request.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test 2: Results should be true\", () => {\r",
+									"    pm.expect(pm.response.json().results).to.eql(true);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-01-05",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-01-05"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return success when the country is blank.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test 2: Results should be true\", () => {\r",
+									"    pm.expect(pm.response.json().results).to.eql(true);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-01-05&country=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-01-05"
+								},
+								{
+									"key": "country",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return Results=true when the date is a valid business day.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonResponse = pm.response.json();\r",
+									"pm.environment.set(\"results\", jsonResponse.results);\r",
+									"\r",
+									"pm.test(\"Test 1: Results should be true\", () => {\r",
+									"    pm.expect(pm.response.json().results).to.eql(true);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-01-05&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-01-05"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return Results=true when the date is Feb 29 in a Leap Year.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test 2: Results should be true\", () => {\r",
+									"    pm.expect(pm.response.json().results).to.eql(true);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2024-02-29&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2024-02-29"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return Results=false when the date is a holiday.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let jsonResponse = pm.response.json();\r",
+									"pm.environment.set(\"results\", jsonResponse.results);\r",
+									"\r",
+									"pm.test(\"Test 1: Results should be false\", () => {\r",
+									"    pm.expect(pm.response.json().results).to.eql(false);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-01-01&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the date is Feb 29 in Non-Leap Years",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//29 feb should return error in Non-Leap years\r",
+									"\r",
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid date is required {{year}} is a Non-Leap year.\"); //{{year}} should be the requested year\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-02-29&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-02-29"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the date is blank.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid date is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": ""
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the date is Feb 30 in any year.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid date is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-02-30&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-02-30"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the date format is invalid.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid date format is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022/02/30&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022/02/30"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the date format is invalid.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid date is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=QA&country=BR",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "QA"
+								},
+								{
+									"key": "country",
+									"value": "BR"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the country is invalid.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(404);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Country not found\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-02-30&country=QA",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-02-30"
+								},
+								{
+									"key": "country",
+									"value": "QA"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the country format is invalid.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid country is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/isBusinessDay?date=2022-02-30&country=BR123",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"isBusinessDay"
+							],
+							"query": [
+								{
+									"key": "date",
+									"value": "2022-02-30"
+								},
+								{
+									"key": "country",
+									"value": "BR123"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "GET - settlementDate",
+			"item": [
+				{
+					"name": "Validate Schema",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const schema = {\r",
+									"    \"type\": \"object\",\r",
+									"    \"properties\": {\r",
+									"        \"ok\": {\r",
+									"            \"type\": \"boolean\"\r",
+									"        },\r",
+									"        \"initialQuery\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"properties\": {\r",
+									"                \"initialDate\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"delay\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                }\r",
+									"            }\r",
+									"        },\r",
+									"        \"results\": {\r",
+									"            \"type\": \"object\",\r",
+									"            \"properties\": {\r",
+									"                \"businessDate\": {\r",
+									"                    \"type\": \"string\"\r",
+									"                },\r",
+									"                \"holidayDays\": {\r",
+									"                    \"type\": \"integer\"\r",
+									"                },\r",
+									"                \"totalDays\": {\r",
+									"                    \"type\": \"integer\"\r",
+									"                },\r",
+									"                \"weekendDays\": {\r",
+									"                    \"type\": \"integer\"\r",
+									"                }\r",
+									"            }\r",
+									"        }\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"const response = pm.response.json();\r",
+									"\r",
+									"pm.test('Schema is valid', () => {\r",
+									"    pm.expect(response).to.have.jsonSchema(schema);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "delay",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate Response",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var expected_response = {\r",
+									"    \"ok\": true,\r",
+									"    \"initialQuery\": {\r",
+									"        \"initialDate\": \"2022-01-01\",\r",
+									"        \"delay\": \"0\"\r",
+									"    },\r",
+									"    \"results\": {\r",
+									"        \"businessDate\": \"2022-01-01T03:00:00Z\",\r",
+									"        \"holidayDays\": 0,\r",
+									"        \"totalDays\": 1,\r",
+									"        \"weekendDays\": 1\r",
+									"    }\r",
+									"}\r",
+									"pm.test(\"Test 1: Validanting response\", () => {\r",
+									"    pm.expect(expected_response).to.eql(pm.response.json());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "delay",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Validate headers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Content-Type\", () => {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.eql('application/json; charset=utf-8');\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "delay",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return success when initialDate and delay are valid.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: Should return OK', () => {\r",
+									"    pm.response.to.have.status('OK');\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test 3 :Response time is less than 200ms\", () => {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "delay",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return success when the initialDate is Feb 29 in a Leap Year.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const expected_response = {\r",
+									"    \"ok\": true,\r",
+									"    \"initialQuery\": {\r",
+									"        \"initialDate\": \"2024-02-29\",\r",
+									"        \"delay\": \"0\"\r",
+									"    },\r",
+									"    \"results\": {\r",
+									"        \"businessDate\": \"2024-02-29T03:00:00Z\",\r",
+									"        \"holidayDays\": 0,\r",
+									"        \"totalDays\": 0,\r",
+									"        \"weekendDays\": 0\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"\r",
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test 2: Validanting response\", () => {\r",
+									"    pm.expect(expected_response).to.eql(pm.response.json());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-02-29&delay=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-02-29"
+								},
+								{
+									"key": "delay",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the initialDate is Feb 30 in any year.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid date is required {{year}} is a Non-Leap year.\"); //{{year}} should be the requested year\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-02-30&delay=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-02-30"
+								},
+								{
+									"key": "delay",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return success when the initialDate is holiday and delay are valid.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const expected_response = {\r",
+									"    \"ok\": true,\r",
+									"    \"initialQuery\": {\r",
+									"        \"initialDate\": \"2022-01-01\",\r",
+									"        \"delay\": \"0\"\r",
+									"    },\r",
+									"    \"results\": {\r",
+									"        \"businessDate\": \"2024-01-02T03:00:00Z\",\r",
+									"        \"holidayDays\": 1,\r",
+									"        \"totalDays\": 1,\r",
+									"        \"weekendDays\": 0\r",
+									"    }\r",
+									"}\r",
+									"\r",
+									"\r",
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Test 2: Validanting response\", () => {\r",
+									"    pm.expect(expected_response).to.eql(pm.response.json());\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay=0",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "delay",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the initialDate is blank.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A initial date is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=&delay=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": ""
+								},
+								{
+									"key": "delay",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the initialDate format is invalid.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid initial date format is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022/01/01&delay=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022/01/01"
+								},
+								{
+									"key": "delay",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the initialDate is invalid.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 400 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid initial date is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=QA&delay=1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "QA"
+								},
+								{
+									"key": "delay",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the delay is a negative number.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Delay should be 0 or a positive number less or equal 7\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay=-1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "delay",
+									"value": "-1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the delay is a number greater than 7",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Delay should be 0 or a positive number less or equal 7\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay=1000",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "delay",
+									"value": "1000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the delay isn't a number.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"Delay should be 0 or a positive number less or equal 7\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay=QA",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "delay",
+									"value": "QA"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Should return an error when the delay is blank.",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test('Test 1: 200 Status Code', () => {\r",
+									"    pm.expect(pm.response.code).to.equal(400);\r",
+									"});\r",
+									"\r",
+									"pm.test('Test 2: Error message', () => {\r",
+									"     pm.expect(pm.response.text()).to.include(\"A valid delay is required\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:3000/api/v1/settlementDate?initialDate=2022-01-01&delay=",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "3000",
+							"path": [
+								"api",
+								"v1",
+								"settlementDate"
+							],
+							"query": [
+								{
+									"key": "initialDate",
+									"value": "2022-01-01"
+								},
+								{
+									"key": "delay",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
