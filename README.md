@@ -1,5 +1,19 @@
 # scratchpay-qa
 
+Steps to run the aplication:
+
+Download the zip file - https://storage.googleapis.com/scratchpay-com-assets/challenges/qa-challenge-application.zip
+Unzip the file
+Run locally > npm install
+Run locally > npm start
+
+The entire API is accessible under `/api/v1` and the following endpoints are available:
+
+- `GET /api/v1/settlementDate`
+- `GET /api/v1/isBusinessDay`
+
+
+
 Steps to run the automation:
 
 1. Import the postman collection (File > Import > Upload the Collection)
