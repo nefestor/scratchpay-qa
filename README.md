@@ -1,5 +1,9 @@
 # scratchpay-qa
 
+**ApplicationTests.json is related to part 1. Application tests of the challenge.**
+
+**APITests.json is related to part 2. API tests of the challenge.**
+
 Steps to run the aplication:
 
 1. Download the zip file - https://storage.googleapis.com/scratchpay-com-assets/challenges/qa-challenge-application.zip
@@ -11,8 +15,6 @@ The entire API is accessible under `/api/v1` and the following endpoints are ava
 
 - `GET /api/v1/settlementDate`
 - `GET /api/v1/isBusinessDay`
-
-
 
 Steps to run the automation:
 
